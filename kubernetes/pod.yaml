@@ -1,0 +1,39 @@
+kind: Pod           # El tipo de configuración que quiero crear en Kubernetes
+apiVersion: v1      # En qué libreria y en que versión de la misma está definido 
+                    # esa configuración.... Qué es un POD?
+
+                    # La funcionalidad de Kubernetes puede extenderse mediate la
+                    # instalación de librerias adicionales. Esas librerias 
+                    # permiten definir nuevos objetos / configuraciones.
+                    # Reciben el nombre de Custom Resource Definitions
+
+                    # Openshift? Un kbernetes con librerias por encima de Redhat
+                    # Que amplian su funcionalidad
+
+metadata:
+    name: pod-nginx # Identificador del objeto/configuración que estamos creando
+
+spec:
+    initContainers: []
+    # Estos de arriba son contenedores que pueden ejecutar:
+        # Script: Backup de la BBDD los jueves a las 3.
+        # Comando
+    # Los solemos usar como tareas de inicialización.
+    containers:
+        -   name:   nginx
+            image:  nginx:latest
+            ports:
+                - containerPort: 80         # Esto no vale para nada!
+                                            # Para dar pistar al humano que 
+                                            # venga detrás a leerlo.
+            # Qué tipo de software puedo ejecuatr dentro de este contenedor?
+            # Solo podemos ejecutar:
+            #    - Demonios
+            #    - Servicios
+            
+            # Qué pasa si un contenedor deja de funcionar?
+            # Kubernetes entra en PANICO !!! 
+            # A toda costa querrá reinicar el contenedor
+
+
+

@@ -1,0 +1,121 @@
+#YAML?
+#    GNU.... GNU is Not UNIX
+#    YAML aint ML
+
+#Lenguajes informáticos:
+#    Lenguajes de programación:
+#        JAVA
+#        C
+#        PERL
+#        JSON
+#        Python
+#    Lenguajes de marcado de información:
+#        Parser: Un programa que sabe leer un tipo de archivos
+#        YAML *** Kubernetes , Openshift, Ansible, AzureDevops - 1.2
+#        HTML <p> <a> <table>
+#         XML ***
+#        SGML
+#        JSON ***
+#    Lenguajes de acceso a BBDD:
+#        SQL
+#    Lenguajes de modelado:
+#        UML
+---
+En un archivo YAML puede haber muchos documentos YAML.
+Cada documento se separa de otro mediante tres guiones.
+Opcionalmente cada documento puede acabar con tres puntos. Muy raro.
+---
+Un documento en YAML es UN NODO
+---
+Tenemos nodos de varios tipos: Escalares y De colección
+--- 
+Nodos escalares: Son nodos que tienen un único valor
+---
+# Numeros
+18
+---
+-98.87
+---
+# Valores lógicos:
+True # true TRUE
+---
+False # false FALSE
+---
+#OJO
+# En la verisón 1.1 de YAML se permitían como valores lógicos: Se ha quitado de la spec 1.2
+On
+on
+Yes
+y
+yes
+YES
+NO
+N
+n
+off
+Off
+OFF
+---
+#Textos
+"H'\"o #la" # La contrabarra sirve solo entre comillas dobles
+---
+'H''"o #la'
+---
+H'"o #la
+---
+Esta es una linea 1
+
+Esta es una linea 2
+Esta es una linea 3
+---
+# Sintaxis literal
+|+
+ E"'#\sta es una linea 1
+
+  Esta es una linea 2
+ Esta es una linea 3
+
+
+
+---
+# Sintaxis folder
+>-
+ E"'#\sta es una linea 1
+ Esta es una linea 2
+ Esta es una linea 3
+---
+~  # Nulo: NADA
+---
+# Tipos de coleccion:
+---
+# Listas ordenadas
+# Una secuencia de Nodos
+- 3
+- True
+- Hola
+- |
+    ¿Cómo estás?
+    Yo bien
+-
+    - Subitem 1
+    - Subitem 2
+    
+-      - Subitem 1
+       - Subitem 2
+---
+[1,2,3,True]
+---
+[] # Una lista vacia
+---
+# Mapas desaordeandos
+# Una colección de nodos, 
+# en los que cada nodo va identificado por una clave
+clave1: valor1
+clave2: 17
+clave3: 
+    - item1
+    - item2
+---
+{clave1: valor1, clave2: 17 }
+---
+{} # Un diccionario vacio

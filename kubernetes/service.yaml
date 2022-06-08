@@ -1,0 +1,36 @@
+kind: Service       
+apiVersion: v1      
+
+# al crear un servicio, kubernetes me pone un balanceador.. con su dirección IP
+# Me configura la IP del balanceador en el DNS de kubernetes, con el nombre
+# que le indico ahí abajo
+# Y configura el balanceador para que cualquier petición la reenvie a uno de un 
+# conjunto de pods que estén en marcha ofreciendo ese servicio realmente
+
+metadata:
+    name: bbdd-app1 # El nombre que se da de alta en el DNS de kubernetes
+
+spec:
+    selector:   # Quiero que en backend, el balanceador redirija las peticiones 
+                # A cualquier pod que tenga esta etiqueta
+        app: mariadb
+    ports:
+        - port:       8306 # Puerto del balanceador de carga
+          targetPort: 3306 # Puerto del contenedor
+    type: ClusterIP
+---
+kind: Service       
+apiVersion: v1      
+
+metadata:
+    name: app-web # El nombre que se da de alta en el DNS de kubernetes
+
+spec:
+    selector:   # Quiero que en backend, el balanceador redirija las peticiones 
+                # A cualquier pod que tenga esta etiqueta
+        app: nginx
+    ports:
+        - port:       8080 # Puerto del balanceador de carga
+          targetPort: 80 # Puerto del contenedor
+          #nodePort: 32080
+    type: LoadBalancer #NodePort

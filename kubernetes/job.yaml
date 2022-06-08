@@ -1,0 +1,14 @@
+kind: Job           # El tipo de configuración que quiero crear en Kubernetes
+apiVersion: v1      
+metadata:
+    name: job-backup # Identificador del objeto/configuración que estamos creando
+
+spec:
+    containers:
+        -   name:   hacedor-de-backup
+            image:  mysql:latest
+            command:
+                #mysql dump
+
+
+

@@ -1,0 +1,79 @@
+kind: Deployment           
+apiVersion: apps/v1      
+
+metadata:
+    name: despliegue-de-nginx 
+
+spec:
+    replicas: 3
+    
+    selector:
+        matchLabels:
+            app: nginx
+    
+    template:
+        metadata:
+            name: plantilla-pod-nginx
+            labels:
+                app: nginx
+        spec:
+            containers:
+                -   name:   nginx
+                    image:  nginx:latest
+                    ports:
+                        - containerPort: 80
+
+---
+kind: Deployment           
+apiVersion: apps/v1      
+
+metadata:
+    name: despliegue-de-mariadb 
+# Los pods que se creen desde este deployment se llamarán:
+#   despliegue-de-mariadb-D5B67AS-12DHA
+#                       replciaset
+spec:
+    replicas: 1
+    
+    selector:
+        matchLabels:
+            app: mariadb
+    
+    template:
+        metadata:
+            name: plantilla-pod-mariadb
+            labels:
+                app: mariadb
+        spec:
+            containers:
+                -   name:   mariadb
+                    image:  mariadb:latest
+                    ports:
+                        - containerPort: 3306
+                    env:
+                        - name: MARIADB_USER 
+                          value: usuario
+                          
+                        - name: MARIADB_PASSWORD
+                          value: Password
+                          
+                        - name: MARIADB_BATABASE
+                          value: mibbdd
+                          
+                        - name: MARIADB_ROOT_PASSWORD
+                          valueFrom: 
+                            secretKeyRef:
+                                name: configuracion-mariadb
+                                key: root_password
+
+# Password en crudo
+# Donde voy a desplegar esta app? mariadb?
+#       kubernetes... en cual? en el de producción? SI... previo paso por: pre-producción
+# Yo quiero un fichero UNICO de despliegue...
+# Querré tener además un fichero con los datos necesarios para cada sitio donde quiera hacer el despliegue
+
+                    
+
+# HELM
+
+kubectl apply -f RUTA_FICHERO

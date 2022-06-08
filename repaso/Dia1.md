@@ -407,17 +407,18 @@ Es un tar con carpetas... se descarga y se descomprime
 
 
 HOST
+/
 /etc
 /bin
 /var
     /lib
         /docker 
             /containers 
-                /mi-nginx
+                /mi-nginx.     ******** 
                     CAMBIOS
             /images
                 ... se descomprime la imagen del contenedor
-                    /nginx
+                    /nginx.    ********
                         /etc
                         /bin
                         /lib
@@ -429,6 +430,8 @@ HOST
 /root
 /opt
 
+ls /
+
 El Sistema de archivos de un contenedor se monta mediante la superposicion de capas:
 
 CAPA N: Volumen.   -> Mapeao entre una carpeta del host y una carpeta del contenedor    
@@ -437,4 +440,14 @@ CAPA 1: Contenedor -> /var/lib/docker/containers/mi-nginx
 CAPA 0: Imagen ->     /var/lib/docker/images/nginx
 
 
+
+Docker Inc.
+- docker = docker-engine
+    - demonio / servidor    dockerd > container.d > runc
+                              ^^^
+    - cliente               docker
+- docker desktop for windows
+- docker desktop for mac
+- docker-compose. Es otro cliente de dockerd
+- docker swarm ******
 
