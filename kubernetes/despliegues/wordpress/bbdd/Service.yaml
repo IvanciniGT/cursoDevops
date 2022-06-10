@@ -1,0 +1,12 @@
+kind: Service       
+apiVersion: v1      
+
+metadata:
+    name: bbdd 
+
+spec:
+    selector:  
+        app: bbdd
+    ports:
+        - port:       3306 
+          targetPort: 3306 

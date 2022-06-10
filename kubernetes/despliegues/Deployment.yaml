@@ -48,6 +48,7 @@ spec:
             containers:
                 -   name:   mariadb
                     image:  mariadb:latest
+                    imagePullPolicy: IfNotPresent
                     ports:
                         - containerPort: 3306
                     env:

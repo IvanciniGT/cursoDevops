@@ -1,0 +1,57 @@
+
+kind: StatefulSet
+apiVersion: apps/v1
+
+metadata:
+    name: bbdd
+    labels: 
+        app: bbdd
+        
+spec:
+
+    replicas: 1
+
+    selector:
+        matchLabels:
+            app: bbdd
+
+    serviceName: bbdd
+
+    template:
+        metadata:
+            labels:
+                app: bbdd
+        spec:
+            containers:
+                -   name:   mariadb
+                    image:  mariadb:latest
+                    imagePullPolicy: IfNotPresent
+                    ports:
+                        - containerPort: 3306
+                    env:
+                        - name: MARIADB_USER 
+                          value: usuario
+                          
+                        - name: MARIADB_PASSWORD
+                          value: password
+                          
+                        - name: MARIADB_DATABASE
+                          value: mibbdd
+                          
+                        - name: MARIADB_ROOT_PASSWORD
+                          value: password
+                          
+                    volumeMounts:
+                        - name: volumen-bbdd
+                          mountPath: /var/lib/mysql
+
+    volumeClaimTemplates: 
+        -   metadata:
+                name: volumen-bbdd
+
+            spec:
+                resources:
+                    requests:
+                        storage: 5Gi
+                accessModes:
+                    - ReadWriteOnce
