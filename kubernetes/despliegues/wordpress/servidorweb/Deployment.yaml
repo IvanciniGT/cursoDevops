@@ -32,14 +32,14 @@ spec:
                           value: usuario
                           
                         - name: WORDPRESS_DATABASE_PASSWORD
-                          value: Password
+                          value: password
                           
                         - name: WORDPRESS_DATABASE_NAME
                           value: mibbdd
                           
                         - name: WORDPRESS_DATABASE_HOST
                           value: bbdd
-                          
+
                     volumeMounts:
                         - name: datos-wordpress
                           mountPath: /bitnami/wordpress
