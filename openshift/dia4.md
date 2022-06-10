@@ -148,3 +148,4 @@ Afinidad de Pods Requeridas / Preferidas
     Afinidad a nivel de Pod
     Afinidad a nivel de Nodo
     Antiafinidad a nivel de Pod
+    

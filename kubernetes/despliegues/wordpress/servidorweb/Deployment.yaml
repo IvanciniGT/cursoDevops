@@ -1,0 +1,50 @@
+
+kind: Deployment           
+apiVersion: apps/v1      
+
+metadata:
+    name: wordpress 
+spec:
+    replicas: 1
+    
+    selector:
+        matchLabels:
+            app: wordpress
+    
+    template:
+        metadata:
+            name: wordpress
+            labels:
+                app: wordpress
+        spec:
+
+            containers:
+                -   name:   wordpress
+                    image:  bitnami/wordpress:latest
+                    imagePullPolicy: IfNotPresent
+                    ports:
+                        - containerPort: 8080
+                    env:
+                        - name: ALLOW_EMPTY_PASSWORD 
+                          value: "yes"
+                          
+                        - name: WORDPRESS_DATABASE_USER 
+                          value: usuario
+                          
+                        - name: WORDPRESS_DATABASE_PASSWORD
+                          value: Password
+                          
+                        - name: WORDPRESS_DATABASE_NAME
+                          value: mibbdd
+                          
+                        - name: WORDPRESS_DATABASE_HOST
+                          value: bbdd
+                          
+                    volumeMounts:
+                        - name: datos-wordpress
+                          mountPath: /bitnami/wordpress
+            volumes:
+                - name: datos-wordpress
+                  persistentVolumeClaim:
+                      claimName: wordpress-pvc
+        
