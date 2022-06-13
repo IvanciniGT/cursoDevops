@@ -149,3 +149,41 @@ Afinidad de Pods Requeridas / Preferidas
     Afinidad a nivel de Nodo
     Antiafinidad a nivel de Pod
     
+    
+    
+10 CPUs
+
+
+32 Gbs RAM
+
+8 Gbs RAM BBDD
+
+HA escalabilidad
+1 wp, 17 wp
+
+24 Gbs
+ monitorizacion
+ memchached
+ 1..3 wordpress 6Gbs
+ 
+ CPU
+ 
+
+
+Desarrollo -> repo GIT
+
+Mi trabajo como DEVOPS 
+    Repo -> Imagen contenedor
+        DockerFile
+    
+    Chart    
+        Despliegue Kubernetes
+
+
+
+
+Ansible
+    HAProxy -... configuración
+    Nginx
+    MariaDB -... configuración
+    
