@@ -100,5 +100,20 @@ SCRIPT: Lenguaje imperativo
     Pon como contraseña: password
 
 
+---
 
+IDEMPOTENCIA: Independientemente del estado inicial, al ejecutar un playbook,
+              siempre debemos alcanzar el mismo estado
 
+# Estados en los que puede acabar una tarea
+- ok:           La tarea ha acabado sin problemas
+- changed:      La tarea ha provocado un cambio en el entorno
+- unreachable
+- failed:       La tarea ha terminado con error
+- skipped
+- rescued
+- ignored
+
+---
+SELinux - modulo instala al nivel del kernel de Linux
+Viene de serie con Redhat Enterprise Linux

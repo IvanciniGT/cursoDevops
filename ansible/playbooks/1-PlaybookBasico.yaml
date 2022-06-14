@@ -7,6 +7,22 @@
     hosts: all  # Esta es la práctica extendida
                 # La limitación de en qué entornos se ejecuatrá este playbook puede establecerse en varios lugares... 
                 # Habitualmente se establece en otro sitio... al ejecutar el playbook
+    # En que orden se aplicará el playbook en las máquians remotas del inventario
+    order: inventory # reverse_inventory | sorted (alfabetico) | reverse_sorted | shuffle
+    
+    # Permite obtener información del entorno remoto que estamos configurando
+    gather_facts: True
+    
+    # Variables que podemos usar dentro del playbook
+    # En ansible, existen más de 20 sitios diferentes donde definir variables.
+    # Es un caos, sobre todo el saber cuales tienen prioridad.
+    vars: # Aqui debo incluir un mapa YAML
+        variable1: valor de la variable 1       # Texto
+        variable2: 2                            # Número
+        variable3: True                         # Logico
+        variable4:                              # Lista
+            - item 1
+            - item 2
     
     # Indica 
     tasks:
@@ -15,6 +31,30 @@
             # Referencia a un Módulo
             debug:
                 msg: Esta es la primera tarea
+
+        -   name: Tarea que accede a variables
+            debug:
+                msg: "El valor de la variable 1 es: {{ variable1 }}"
+                                                    # Interpolación de textos
+                                                    # Expresiones JINJA de python
+        -   name: Tarea que también accede a variables
+            debug:
+                msg: |-
+                    El valor de la variable 2 es: {{ variable2 }}
+                    El valor de la variable 3 es: {{ variable3 }}
+            vars:
+                variable3: False # Esta tiene prioridad
+
+        -   name: Tarea que accede a los facts
+            debug:
+                msg: "{{ ansible_facts }}"
+            # Si quisiera sacar los facts de una maquina desde la terminal:
+            # $ ansible localhost -i inventarios/0-InventarioBasico.ini -m setup 
+
+        -   name: La familia del SO
+            debug:
+                #msg: "{{ ansible_facts.os_family }}"
+                msg: "{{ ansible_facts['os_family'] }}"
 
 # Lista 1 item. 
 #    Ese item es un MAPA
