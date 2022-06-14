@@ -781,9 +781,7 @@
                 "uuid": "N/A"
             }
         ], 
-        "nodename": "ip-172-31-2-231", 
-        "os_family": "Debian", 
-        "pkg_mgr": "apt", 
+        "nodename": "ip-172-31-2-231",         "pkg_mgr": "apt", 
         "proc_cmdline": {
             "BOOT_IMAGE": "/boot/vmlinuz-5.4.0-1078-aws", 
             "console": [

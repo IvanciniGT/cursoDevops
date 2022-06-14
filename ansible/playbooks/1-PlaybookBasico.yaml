@@ -25,6 +25,8 @@
             - item 2
     
     # Indica 
+    pre_tasks: []
+    # Aqui se eveluarían handlers
     tasks:
         -   # Primera tarea
             name: Primera tarea
@@ -55,6 +57,84 @@
             debug:
                 #msg: "{{ ansible_facts.os_family }}"
                 msg: "{{ ansible_facts['os_family'] }}"
+
+        -   name: El primer servidor DNS que hay configurado
+            debug:
+                msg: "{{ ansible_facts.dns.nameservers[0] }}"
+                #msg: "{{ ansible_facts['dns'] }}"
+
+        # Tarea condicional
+        -   name: Asegurarme que nginx es utilizable en la maquina
+            apt:
+                name: git
+                state: present
+            become: true    # Ejecuta esto con permisos de administrador
+            when:
+            # Solo cuando se cupla esta condición debe ejecutarse la tarea
+                - ansible_facts['os_family'] == 'Debian'    # En el when se deben escribir una expresion JINJA
+
+        # Tarea condicional
+        -   name: Asegurarme que git es utilizable en la maquina
+            yum:
+                name: git
+                state: present
+            become: true
+            when:
+                - ansible_facts['os_family'] == 'Redhat'
+
+        -   name: >
+                Asegurar que la versión del fichero de 
+                configuración del servicio es la adecuada
+            debug:
+                msg: "Se hará lo que haya que hacer, para que quedé el fichero adecuado si no está"
+                # Se cambiará si es necesario.. y si ya se cambió antes?
+            # Con esto controlo cuando debe ansible considerar que esta tarea 
+            # ha provocado un cambio
+            changed_when: True # Aqui podría poner una expresion JINJA
+            # El notify solo ocurre si la tarea provoca cambio (changed)
+            notify: cambio-configuracion
+
+        -   name: Otra tarea que activa el handler
+            debug:
+                msg: "Hago algo que cambia el entorno"
+            changed_when: True # Aqui podría poner una expresion JINJA
+            # El notify solo ocurre si la tarea provoca cambio (changed)
+            notify: Reiniciar el servicio de MariaDB
+
+        -   name: Ultima tarea
+            debug:
+                msg: "que hace algo también"
+    # Aqui se eveluarían handlers
+    
+    post_tasks: 
+        -   name: Primer posttask
+            debug:
+                msg: "Soy un posttask"
+    # Aqui se eveluarían handlers
+
+    
+    # Los handlers son tareas especiales, que se ejecutan después de TODAS
+    # las tareas que hayan sido definidas en pre o tasks o post. siempre y cuando hayan sido activadas por otra tarea, 
+    # a través de: notify
+    # Los handlers se ejecutan 1 sola vez, 
+    # aunque hayan sido activados muchas veces
+    
+    # Los handlers son evaluados 3 veces para ver si es necesaria su ejecución:
+    # - despues de los pre
+    # - de los tasks
+    # - y de los post
+    
+    
+    handlers:        
+        -   name: Reiniciar el servicio de MariaDB
+            debug:
+                msg: "Reinicio el servicio"    
+            listen: cambio-configuracion
+                
+        -   name: Otro handler
+            debug:
+                msg: "Esta tarea hace lo que sea..."
+            listen: cambio-configuracion
 
 # Lista 1 item. 
 #    Ese item es un MAPA

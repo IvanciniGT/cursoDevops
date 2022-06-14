@@ -110,7 +110,8 @@ IDEMPOTENCIA: Independientemente del estado inicial, al ejecutar un playbook,
 - changed:      La tarea ha provocado un cambio en el entorno
 - unreachable
 - failed:       La tarea ha terminado con error
-- skipped
+- skipped:      La tarea se ha saltado por no cumplirse las condiciones 
+-               necesarias para su ejecución
 - rescued
 - ignored
 
