@@ -1,0 +1,21 @@
+# Playbook
+# Es un conjunto de PLAYS
+# Esos plays son el equivalente a un script
+# Lo normal es que un playbook contenga solo un play
+
+-   # Indica en que entornos debe aplicarse este playbook
+    hosts: all  # Esta es la práctica extendida
+                # La limitación de en qué entornos se ejecuatrá este playbook puede establecerse en varios lugares... 
+                # Habitualmente se establece en otro sitio... al ejecutar el playbook
+    
+    # Indica 
+    tasks:
+        -   # Primera tarea
+            name: Primera tarea
+            # Referencia a un Módulo
+            debug:
+                msg: Esta es la primera tarea
+
+# Lista 1 item. 
+#    Ese item es un MAPA
+#        Ese mapa tiene 2 elementos

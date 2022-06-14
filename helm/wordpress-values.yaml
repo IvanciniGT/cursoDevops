@@ -1,0 +1,165 @@
+
+diagnosticMode:
+  enabled: false
+
+wordpressUsername: ivan
+wordpressPassword: "password"
+##existingSecret: ""   Esto es guay. Lo de arriba NO 
+
+wordpressEmail: ivan.osuna.ayuste@gmail.com
+wordpressFirstName: Ivan
+wordpressLastName: Osuna
+wordpressBlogName: Mi super sitio de Kubernetes y Oopenshift
+wordpressTablePrefix: wp_
+wordpressScheme: http
+wordpressSkipInstall: false
+#wordpressExtraConfigContent: |
+#  @ini_set( 'post_max_size', '128M');
+#  @ini_set( 'memory_limit', '256M' );
+##
+wordpressExtraConfigContent: ""
+wordpressConfiguration: ""
+
+wordpressConfigureCache: false
+wordpressPlugins: none
+apacheConfiguration: ""
+existingApacheConfigurationConfigMap: ""
+customPostInitScripts: {}
+
+smtpHost: ""
+smtpPort: ""
+smtpUser: ""
+smtpPassword: ""
+smtpProtocol: ""
+smtpExistingSecret: ""
+
+multisite:
+  enable: false
+  host: ""
+  networkType: subdomain
+  enableNipIoRedirect: false
+
+replicaCount: 1
+
+podAntiAffinityPreset: soft
+
+nodeAffinityPreset:
+  type: ""
+  key: ""
+  values: []
+affinity: {}
+nodeSelector: {}
+tolerations: []
+
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001110000
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001110000
+  runAsNonRoot: true
+
+resources:
+  limits: 
+    memory: 512Mi
+    cpu: 8000m
+
+  requests:
+    memory: 256Mi
+    cpu: 150m    
+
+service:
+  type: ClusterIP
+  
+ingress:
+  enabled: false
+
+persistence:
+  enabled: true
+
+  storageClass: "" 
+  accessModes:
+    - ReadWriteOnce
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+volumePermissions:
+  enabled: false
+
+serviceAccount:
+  create: false
+  
+pdb:
+  create: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 11
+  targetCPU: 50
+  targetMemory: 50
+
+metrics:
+  enabled: false
+
+networkPolicy:
+  enabled: false
+  ingress:
+    enabled: false
+    podSelector: {}
+    namespaceSelector: {}
+  ingressRules:
+    backendOnlyAccessibleByFrontend: false
+    customBackendSelector: {}
+    accessOnlyFrom:
+      enabled: false
+      podSelector: {}
+      namespaceSelector: {}
+    customRules: {}
+  egressRules:
+    denyConnectionsToExternal: false
+    customRules: {}
+
+mariadb:
+
+  enabled: true
+  architecture: standalone
+
+  auth:
+    rootPassword: ""
+    database: bitnami_wordpress
+    username: bn_wordpress
+    password: ""
+    
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 4Gi
+  
+    podSecurityContext:
+      enabled: true
+      fsGroup: 1001110000
+    
+    containerSecurityContext:
+      enabled: true
+      runAsUser: 1001110000
+      runAsNonRoot: true
+      
+memcached:
+  enabled: false
+  auth:
+    enabled: false
+    username: ""
+    password: ""
+  service:
+    port: 11211
+
+externalCache:
+  host: localhost
+  port: 11211
+
+

@@ -26,8 +26,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 type: Opaque
 data:
-  mariadb-root-password: "Y2s4WXRhSnBNRQ=="
-  mariadb-password: "WnZRSFVqaWZ4TQ=="
+  mariadb-root-password: "ZWJLNkpTS3JKNg=="
+  mariadb-password: "dENDNGhQU1kwSg=="
 ---
 # Source: wordpress/templates/secrets.yaml
 apiVersion: v1
@@ -42,7 +42,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 type: Opaque
 data:
-  wordpress-password: "aXZhbmNldGU="
+  wordpress-password: "cGFzc3dvcmQ="
 ---
 # Source: wordpress/charts/mariadb/templates/primary/configmap.yaml
 apiVersion: v1
@@ -144,18 +144,19 @@ metadata:
     app.kubernetes.io/instance: release-name
     app.kubernetes.io/managed-by: Helm
 spec:
-  type: LoadBalancer
-  externalTrafficPolicy: "Cluster"
+  type: ClusterIP
   sessionAffinity: None
   ports:
     - name: http
       port: 80
       protocol: TCP
       targetPort: http
+      nodePort: null
     - name: https
       port: 443
       protocol: TCP
       targetPort: https
+      nodePort: null
   selector:
     app.kubernetes.io/name: wordpress
     app.kubernetes.io/instance: release-name
@@ -240,24 +241,24 @@ spec:
                   name: release-name-mariadb
                   key: mariadb-password
             - name: WORDPRESS_USERNAME
-              value: "user"
+              value: "ivan"
             - name: WORDPRESS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: release-name-wordpress
                   key: wordpress-password
             - name: WORDPRESS_EMAIL
-              value: "user@example.com"
+              value: "ivan.osuna.ayuste@gmail.com"
             - name: WORDPRESS_FIRST_NAME
-              value: "FirstName"
+              value: "Ivan"
             - name: WORDPRESS_LAST_NAME
-              value: "LastName"
+              value: "Osuna"
             - name: WORDPRESS_HTACCESS_OVERRIDE_NONE
               value: "no"
             - name: WORDPRESS_ENABLE_HTACCESS_PERSISTENCE
               value: "no"
             - name: WORDPRESS_BLOG_NAME
-              value: "User's Blog!"
+              value: "Mi super sitio de Kubernetes y Oopenshift"
             - name: WORDPRESS_SKIP_BOOTSTRAP
               value: "no"
             - name: WORDPRESS_TABLE_PREFIX
@@ -301,10 +302,12 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
           resources:
-            limits: {}
-            requests:
-              cpu: 300m
+            limits:
+              cpu: 8000m
               memory: 512Mi
+            requests:
+              cpu: 150m
+              memory: 256Mi
           volumeMounts:
             - mountPath: /bitnami/wordpress
               name: wordpress-data
@@ -368,14 +371,14 @@ spec:
         nodeAffinity:
           
       securityContext:
-        fsGroup: 1001
+        fsGroup: 1001050000
       containers:
         - name: mariadb
           image: docker.io/bitnami/mariadb:10.6.8-debian-10-r0
           imagePullPolicy: "IfNotPresent"
           securityContext:
             runAsNonRoot: true
-            runAsUser: 1001
+            runAsUser: 1001050000
           env:
             - name: BITNAMI_DEBUG
               value: "false"
@@ -453,4 +456,4 @@ spec:
           - "ReadWriteOnce"
         resources:
           requests:
-            storage: "8Gi"
+            storage: "4Gi"
