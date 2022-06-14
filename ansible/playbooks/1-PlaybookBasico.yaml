@@ -23,6 +23,7 @@
         variable4:                              # Lista
             - item 1
             - item 2
+        RUTA: /tmp/prueba
     
     # Indica 
     pre_tasks: []
@@ -110,6 +111,53 @@
         -   name: Primer posttask
             debug:
                 msg: "Soy un posttask"
+                
+        -   name: Quiero crear una carpeta
+            shell: |
+                    RUTA=/tmp
+                    
+                    if [ -d "$RUTA" ]; then # Comprueba si es un directorio
+                        exit 0              # Si lo es te piras, TODO OK !!!
+                    elif [ -e "$RUTA" ]; then
+                        # No era un directorio
+                        # Devuelve true si la ruta existe
+                        exit 2              # Tengo algo ahi... que no es un directorio: Fichero, Pipe, Enlace simbolico
+                    else
+                        # Ni es un directorio , ni hay nada ahi
+                        # Por lo tanto, que hago? creo el directorio
+                        mkdir -p $RUTA
+                            # Si las carpetas intermedias no existen las crea
+                            # si la carpeta ya existe no hace nada
+                        exit 1
+                    fi
+            register: creacion_carpeta
+            changed_when: creacion_carpeta.rc == 1
+            failed_when:  creacion_carpeta.rc > 1
+                # python modulo shell:
+                #   1 - abre una shell
+                #   2 - tira en la shell lo que hayan puesto aqui
+                #   3 - ReturnCode -> 1+ -> FAILED 
+                #       Si es 0          -> OK | CHANGED
+
+        -   name: Salida de la tarea anterior
+            debug:
+                msg: "{{ creacion_carpeta }}"
+
+
+        -   name: Asegurarme un directorio 
+            file: 
+                path: /tmp/prueba
+                state: directory
+                
+                # python
+                #
+                #   file: 
+                #       1 - Mira a ver si la ruta existe
+                    #       2 - Si existe, mira a ver si es un directorio
+                        #      3 -  Si es un directorio -> OK
+                #              4 -  Si no es un directorio -> FAILED
+                #           5- Si no existe...mkdir -p /tmp/prueba
+                #                           -> CHANGED
     # Aqui se eveluarían handlers
 
     
