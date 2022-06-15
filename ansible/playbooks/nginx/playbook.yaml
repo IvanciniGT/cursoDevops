@@ -42,13 +42,15 @@
 #                    Asegurarme que el servicio está arrancado:
 #                        Si ya está arrancado, que hago? NADA
 #                        Si no lo estuviera?             ARRANCO
-# Configurar ese algo que voy a poner dentro del nginx
 
-# Tendré que poner algo dentro del nginx
+# Quitar las cochinadas que nos pone nginx por defecto
 
-# Configurar un servicio
+# Configurar ese algo que voy a poner dentro del nginx : Copiar otro fichero de conf. 
 
-# Arrancar el servicio
+# Tendré que poner algo dentro del nginx < Depsliegue de mi app... Copiar mi app en una carpeta
+
+# Configurar un servicio -> Activarlo con la maquina
+
 
 # Abrir la comunicación del puerto
 
