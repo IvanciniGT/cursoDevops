@@ -1,0 +1,4 @@
+-   name: Desinstalar el nginx si estoy en Redhat o derivados
+    yum:
+        name: nginx
+        state: absent

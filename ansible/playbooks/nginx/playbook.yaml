@@ -3,17 +3,22 @@
 -   hosts: all
 
     gather_facts: True
+    become: True
     
-    vars: {}
+    vars:   # Las variables las voy a quitar de aqui más adelante!!!
+        nginx_version: 1.14.0
+        SUPPORTED_OS: 
+            - Debian
+            - Redhat
     
     pre_tasks:
-        -   include_tasks: "pretasks/playbook.yaml"
+        -   include_tasks: "pretasks/main.yaml"
             
     tasks:
-        -   include_tasks: "tasks/playbook.yaml"
+        -   include_tasks: "tasks/main.yaml"
 
     post_tasks:
-        -   include_tasks: "posttasks/playbook.yaml"
+        -   include_tasks: "posttasks/main.yaml"
 
     handlers:
-        -   include_tasks: "handlers/playbook.yaml"
+        -   include_tasks: "handlers/main.yaml"

@@ -1,0 +1,6 @@
+-   name:   >
+        Asegurarme que la versión de nginx que me pidan 
+        queda instalada si estoy en Redhat o derivados
+    yum:
+        name: "nginx-{{ nginx_version }}"
+        state: present

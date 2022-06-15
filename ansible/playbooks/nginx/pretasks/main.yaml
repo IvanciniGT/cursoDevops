@@ -1,0 +1,46 @@
+# Y si esto se ejecuta en una maquina que no es ni Debian ni Redhat???
+-   name: Asegurerme que la máquina es Debian o Redhat
+    fail: 
+        msg: Sistema operativo no soportado
+    when: ansible_facts['os_family'] not in SUPPORTED_OS
+   
+-   name: Obtener la versión de nginx instalada
+    shell:
+        cmd: "nginx -v"
+    failed_when: False
+    register: version # version.stdout  
+
+-   block:
+        -   name: Asegurarnos que el servicio de nginx está detenido
+            service:
+                name: nginx
+                state: stopped
+
+        -   name: Desinstalar el nginx en función del SO del servidor
+            include_tasks: "os-tasks/{{ ansible_facts['os_family'] }}/uninstall.yaml"
+
+
+        #    # En función del SO:
+        #-   name: Desinstalar el nginx si estoy en Debian o derivados
+        #    apt:
+        #        name: nginx
+        #        state: absent
+        #    when: ansible_facts['os_family'] == 'Debian'
+
+        #-   name: Desinstalar el nginx si estoy en Redhat o derivados
+        #    yum:
+        #        name: nginx
+        #        state: absent
+        #    when: ansible_facts['os_family'] == 'Redhat'
+            
+    #     Si hay instalada una versión y no es la que quiero: 
+    when: version.rc == 0 and nginx_version not in version.stdout
+          # nginx version: nginx/1.14.0 (Ubuntu).      1.14.0
+          # Opciones: 1: Forzar a que el comando ya me devuelva solo la version
+          # Opción 2: Usar expresiones regulares
+          # Opción 3: Usar el operador "in" de jinja
+    
+    
+
+
+# Ubuntu/Debian. Redhat/Fedora/CentOS

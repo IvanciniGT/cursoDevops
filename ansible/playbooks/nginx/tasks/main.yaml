@@ -1,12 +1,16 @@
--   name:   Asegurarme que la versión de nginx que me pidan queda instalada.  # NGINX
+#******
+-   name: Asegurarme que mi nginx queda instalado
+    include_tasks: "os-tasks/{{ ansible_facts['os_family'] }}/install.yaml"
 
 -   name:   Asegurarme que nginx queda configurado como debe estarlo          # CONFIGURACION
     notify: reiniciar-servicio
     # /etc/nginx/nginx.conf
 
+#******
 -   name:   Asegurarme que las apps por defecto de nginx quedan desinstaladas
     # /etc/nginx/sites-enabled/
     # /etc/nginx/sites-available/
+    file
     
 -   name:   Asegurarme que mis apps quedan configuradas
     # /etc/nginx/sites-enabled/
@@ -15,8 +19,15 @@
 -   name:   Asegurarme que mis apps quedan instaladas
     # /var
 
+#******
 -   name:   Asegurarme que el servicio queda configurado
     # /var
+    service:
 
+#******
 -   name:   Asegurarme que los puertos quedan abiertos
     # /var
+    ufw
+    firewalld
+    iptables
+    

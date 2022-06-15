@@ -1,0 +1,4 @@
+-   name: Desinstalar el nginx si estoy en Debian o derivados
+    apt:
+        name: nginx
+        state: absent
