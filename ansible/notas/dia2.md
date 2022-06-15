@@ -76,3 +76,24 @@ Adicionalmente, sobre cualquier variable podemos preguntar:
 
 - mivariable is defined
 - mivariable is undefined
+
+ 
+---
+
+NGINX - Servidor web.    **** Programa . UNIX/Linux hay rutas fijas
+App , página             **** Lo que pongo dentro a funcionar
+
+
+
+/
+    bin/        ejecutables de sistema y más comandos que instale
+    boot/       información y gestor de arranque
+    etc/        configuraciones                                         *******
+                    configuración de la app
+    var/        datos de los programas que cambian con el tiempo        *******
+                    aplicacion
+    opt/        programas                                               *******
+    mnt/        puntos de montaje
+    root/       carpeta del usuario root
+    home/       carpetas del resto de usuarios
+    tmp/        temporales que se borran tras un reinicio
