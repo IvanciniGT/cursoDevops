@@ -4,3 +4,4 @@
     apt:
         name: "nginx={{ nginx_version }}"
         state: present
+    register: install

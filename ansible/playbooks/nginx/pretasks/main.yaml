@@ -8,6 +8,7 @@
     shell:
         cmd: "nginx -v"
     failed_when: False
+    changed_when: False
     register: version # version.stdout  
 
 -   block:

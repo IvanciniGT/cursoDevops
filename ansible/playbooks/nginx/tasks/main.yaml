@@ -8,14 +8,21 @@
 
 #******
 -   name:   Asegurarme que las apps por defecto de nginx quedan desinstaladas
-    # /etc/nginx/sites-enabled/
-    # /etc/nginx/sites-available/
-    file
-    
--   name:   Asegurarme que mis apps quedan configuradas
-    # /etc/nginx/sites-enabled/
-    # /etc/nginx/sites-available/
-    
+    block:
+        -   name:   Buscar condiguraciones de apps por defecto
+            find:
+                path: "/etc/nginx/sites-enabled/"
+                file-type: "link"
+            register: default-apps
+        
+        -   name:   Asegurarme que las apps por defecto de nginx quedan desinstaladas
+            file:
+                path: "{{ item.path }}"
+                state: absent
+            loop: "{{ default-apps.files }}"
+    when: install is changed
+
+
 -   name:   Asegurarme que mis apps quedan instaladas
     # /var
 
