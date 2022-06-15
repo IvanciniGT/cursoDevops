@@ -113,7 +113,7 @@ IDEMPOTENCIA: Independientemente del estado inicial, al ejecutar un playbook,
 - skipped:      La tarea se ha saltado por no cumplirse las condiciones 
 -               necesarias para su ejecución
 - rescued
-- ignored
+- ignored:      La tarea acaba con error, pero el error se ignora
 
 ---
 SELinux - modulo instala al nivel del kernel de Linux

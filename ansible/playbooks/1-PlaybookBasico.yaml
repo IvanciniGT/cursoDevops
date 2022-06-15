@@ -144,10 +144,20 @@
                 msg: "{{ creacion_carpeta }}"
 
 
-        -   name: Asegurarme un directorio 
+        # Esta tarea genera un error... la ejecución por defecto se corta al haber encontrado un error.
+        -   name: Tarea explosiva
+            shell:
+                cmd: "exit 1"
+            register: explosiva
+            #failed_when: explosiva.rc > 1
+            ignore_errors: True #explosiva.rc == 1
+
+
+        -   name: Tarea de rescate 
             file: 
                 path: /tmp/prueba
                 state: directory
+            when: explosiva is failed
                 
                 # python
                 #
@@ -158,6 +168,45 @@
                 #              4 -  Si no es un directorio -> FAILED
                 #           5- Si no existe...mkdir -p /tmp/prueba
                 #                           -> CHANGED
+                
+        -   block: # Dentro, puedo poner una lista de tareas
+                -   name: Tarea que puede dar error 
+                    shell:
+                        cmd: "exit 17"
+                    register: potencialmente_explosiva
+                
+            rescue: # catch
+            
+        # Si la tarea da un error. mos gustaria aplciar otras tareas    
+                -   name: Tarea que se ejecutará si la anterior produce un error
+                    debug:
+                        msg: Tarea rescate 1
+                    when: potencialmente_explosiva.rc == 17
+                    
+                -   name: Tarea que se ejecutará si la anterior produce un error
+                    debug:
+                        msg: Tarea rescate 1
+                    when: potencialmente_explosiva.rc == 20
+            
+            always: # finally
+            
+                -   name: Tarea que se ejecuta siempre
+                    debug:
+                        msg: Tarea que siempre ocurre
+
+                
+        -   block: # Dentro, puedo poner una lista de tareas
+                -   name: Tarea 1
+                    debug:
+                        msg: "Soy la tarea 1 del bloque"
+                -   name: Tarea 2
+                    shell:
+                        cmd: "echo Soy la tarea 1 del bloque {{ variable1 }}"
+            vars:
+                variable1: Nuevo valor
+            #when:
+            
+                
     # Aqui se eveluarían handlers
 
     
