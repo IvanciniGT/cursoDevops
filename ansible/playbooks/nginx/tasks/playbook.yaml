@@ -1,0 +1,22 @@
+-   name:   Asegurarme que la versión de nginx que me pidan queda instalada.  # NGINX
+
+-   name:   Asegurarme que nginx queda configurado como debe estarlo          # CONFIGURACION
+    notify: reiniciar-servicio
+    # /etc/nginx/nginx.conf
+
+-   name:   Asegurarme que las apps por defecto de nginx quedan desinstaladas
+    # /etc/nginx/sites-enabled/
+    # /etc/nginx/sites-available/
+    
+-   name:   Asegurarme que mis apps quedan configuradas
+    # /etc/nginx/sites-enabled/
+    # /etc/nginx/sites-available/
+    
+-   name:   Asegurarme que mis apps quedan instaladas
+    # /var
+
+-   name:   Asegurarme que el servicio queda configurado
+    # /var
+
+-   name:   Asegurarme que los puertos quedan abiertos
+    # /var

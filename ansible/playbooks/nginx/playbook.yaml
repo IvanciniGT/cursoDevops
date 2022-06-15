@@ -7,67 +7,13 @@
     vars: {}
     
     pre_tasks:
-        -   name: Obtener la versión de nginx instalada
-            register: version
-        
-        -   block:
-                -   name: Asegurarnos que el servicio de nginx está detenido
-                
-                    # En función del SO:
-                -   name: Desinstalar el nginx
-            when: # Si la versión instala no es la quiero
+        -   include_tasks: "pretasks/playbook.yaml"
             
     tasks:
-        # En función del SO:
-        -   name:   Asegurarme que la versión de nginx que me pidan queda instalada.  # NGINX
+        -   include_tasks: "tasks/playbook.yaml"
 
-        -   name:   Asegurarme que nginx queda configurado como debe estarlo          # CONFIGURACION
-            notify: reiniciar-servicio
-            # /etc/nginx/nginx.conf
-        
-        -   name:   Asegurarme que las apps por defecto de nginx quedan desinstaladas
-            # /etc/nginx/sites-enabled/
-            # /etc/nginx/sites-available/
-            
-        -   name:   Asegurarme que mis apps quedan configuradas
-            # /etc/nginx/sites-enabled/
-            # /etc/nginx/sites-available/
-            
-        -   name:   Asegurarme que mis apps quedan instaladas
-            # /var
-
-        -   name:   Asegurarme que el servicio queda configurado
-            # /var
-
-        -   name:   Asegurarme que los puertos quedan abiertos
-            # /var
-
-            
     post_tasks:
-
-        -   name:   Asegurarme que el servicio quede arrancado
-
-        -   name:   Pruebas
-            block:
-                -   name:   Probar nginx
-                -   name:   Probar app
-                -   name:   Probar comunicaciones
+        -   include_tasks: "posttasks/playbook.yaml"
 
     handlers:
-        -   name:   Reiniciar el servicio
-            listen: reiniciar-servicio
-
-
-################################################################################          
-#NGINX :             OK          CHANGED     OK          CHANGED
-#CONFIGURACION:      OK          OK          CHANGED     CHANGED
-#SERVICIO???:        VVVV        VVVVVV      Reinicio    Arrancar(reinicio)
-#                    Asegurarme que el servicio está arrancado:
-#                        Si ya está arrancado, que hago? NADA
-#                        Si no lo estuviera?             ARRANCO
-
-# IDEMPOTENCIA: Da igual el estado inicial, siempre alcanzo el mismo estado final
-
-# Y si vuelvo a ejecutar el playbook más adelante?
-# Que pasa si ya tengo un nginx instalado y corriendo y me piden una nueva version de nginx?
-# Pero me piden una nueva configuración del nginx
+        -   include_tasks: "handlers/playbook.yaml"

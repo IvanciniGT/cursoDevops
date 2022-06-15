@@ -1,0 +1,8 @@
+-   name:   Asegurarme que el servicio quede arrancado
+
+-   name:   Pruebas
+    block:
+        -   name:   Probar nginx
+        -   name:   Probar app
+        -   name:   Probar comunicaciones
+
