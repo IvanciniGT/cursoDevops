@@ -195,7 +195,8 @@
                         msg: Tarea que siempre ocurre
 
                 
-        -   block: # Dentro, puedo poner una lista de tareas
+        -   name: Aqui voy a hacer no se cuantos
+            block: # Dentro, puedo poner una lista de tareas
                 -   name: Tarea 1
                     debug:
                         msg: "Soy la tarea 1 del bloque"

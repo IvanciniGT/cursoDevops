@@ -77,7 +77,7 @@ Adicionalmente, sobre cualquier variable podemos preguntar:
 - mivariable is defined
 - mivariable is undefined
 
- 
+  
 ---
 
 NGINX - Servidor web.    **** Programa . UNIX/Linux hay rutas fijas
@@ -97,3 +97,22 @@ App , página             **** Lo que pongo dentro a funcionar
     root/       carpeta del usuario root
     home/       carpetas del resto de usuarios
     tmp/        temporales que se borran tras un reinicio
+    
+    
+---
+
+Servicios en Linux
+
+systemd < systemctl 
+
+systemctl status SERVICE
+
+systemctl start SERVICE
+systemctl stop SERVICE
+systemctl restart SERVICE
+
+systemctl enable SERVICE            Al reiniciar el sistema, el servicio debe arrancar
+systemctl disable SERVICE           Al reiniciar el sistema el servicio no debe arrancar
+
+
+systemctl enable nginx -> SOLO configura el reinicio... no el valor actual.. no me deja nginx arrancao
