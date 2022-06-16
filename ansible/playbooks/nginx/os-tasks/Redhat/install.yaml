@@ -1,7 +1,8 @@
 -   name:   >
-        Asegurarme que la versión de nginx que me pidan 
-        queda instalada si estoy en Redhat o derivados
+        Asegurarme que unos paquetes que me pidan 
+        queden instalados si estoy en Redhat o derivados
     yum:
-        name: "nginx-{{ nginx_version }}"
+        name: "{{ item.key }}{{ '' if item.value is none else ('-' + item.value) }}"
         state: present
+    loop: "{{ paquetes | dict2items }}"
     register: install

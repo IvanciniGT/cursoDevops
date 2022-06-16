@@ -41,7 +41,11 @@
           # Opción 2: Usar expresiones regulares
           # Opción 3: Usar el operador "in" de jinja
     
-    
+-   name: Asegurarme que las dependencias de este playbook estén instaladas en la máquina
+    include_tasks: "os-tasks/{{ ansible_facts['os_family'] }}/install.yaml"
+    vars:
+        paquetes: "{{ DEPENDENCIES }}"
+
 
 
 # Ubuntu/Debian. Redhat/Fedora/CentOS

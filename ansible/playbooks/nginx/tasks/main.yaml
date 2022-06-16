@@ -1,9 +1,14 @@
 #******
 -   name: Asegurarme que mi nginx queda instalado
     include_tasks: "os-tasks/{{ ansible_facts['os_family'] }}/install.yaml"
-
+    vars:
+        paquetes:
+            nginx: "{{ nginx_version }}"
+    
 -   name:   Asegurarme que nginx queda configurado como debe estarlo          # CONFIGURACION
     notify: reiniciar-servicio
+    debug:
+        msg: "Configurando nginx"
     # /etc/nginx/nginx.conf
 
 #******
@@ -23,8 +28,17 @@
     when: install is changed
 
 
--   name:   Asegurarme que mis apps quedan instaladas
-    # /var
+-   name:   Asegurarme que mi(s) app(s) quedan instaladas
+    debug:
+        msg: "Instalando apps"
+    # /var/webapps/app1
+    # Copiar un app web: html, css, js, php
+    
+    #Tareas: # Idempotencia
+    #    1: Asegurarme que las dependencias de este playbook estén instaladas en la máquina
+    #    2: Crear la carpeta si no está creada
+    #    3: Utilizar el modulo git ... para qué? Pedir a git que clone el repo
+    
 
 #******
 -   name:   Asegurarme que el servicio queda configurado
@@ -58,4 +72,4 @@
         
         -   name: Asegurarme que los puertos están abiertos en caso de ser necesario
             include_tasks: "firewall/{{ firewall_utilizado.stdout }}.yaml"
-            when: 'Ninguno' not in firewall_utilizado.stdout
+            when: "'Ninguno' not in firewall_utilizado.stdout"

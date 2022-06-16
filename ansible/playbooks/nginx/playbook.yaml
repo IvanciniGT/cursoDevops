@@ -10,7 +10,9 @@
         SUPPORTED_OS: 
             - Debian
             - Redhat
-    
+        DEPENDENCIES:
+            git: ~
+            
     pre_tasks:
         -   include_tasks: "pretasks/main.yaml"
             
