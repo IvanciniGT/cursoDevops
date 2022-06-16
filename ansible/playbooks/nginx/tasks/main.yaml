@@ -53,6 +53,15 @@
                 dest: "/etc/nginx/sites-available/{{ item.name }}"
                 mode: '0644'
             loop: "{{ apps_to_deploy }}"
+
+        -   name: >-
+                    Asegurarme que la configuración de mi app está vinculada en la 
+                    carpeta /etc/nginx/sites-enabled
+            file:
+                src: "/etc/nginx/sites-available/{{ item.name }}"
+                path: "/etc/nginx/sites-enabled/{{ item.name }}"
+                state: link
+            loop: "{{ apps_to_deploy }}"
                     
 #******
 -   name:   Asegurarme que el servicio queda configurado
