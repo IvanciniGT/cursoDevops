@@ -1,0 +1,6 @@
+-   name: Asegurarme que los puertos están abiertos en firewalld
+    firewalld:
+        port: 80/tcp
+        permanent: yes
+        state: enabled
+

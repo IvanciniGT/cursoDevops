@@ -1,0 +1,7 @@
+-   name: Asegurarme que los puertos están abiertos en iptables
+    iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_ports:
+          - "80"
+        jump: ACCEPT
