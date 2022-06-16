@@ -43,8 +43,7 @@
                 #single_branch: yes
                 version: "{{ item.version }}"
             loop: "{{ apps_to_deploy }}"
-    #    3: Utilizar el modulo git ... para qué? Pedir a git que clone el repo
-    
+
 
 #******
 -   name:   Asegurarme que el servicio queda configurado
