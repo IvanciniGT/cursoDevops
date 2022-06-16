@@ -17,14 +17,14 @@
         -   name:   Buscar condiguraciones de apps por defecto
             find:
                 path: "/etc/nginx/sites-enabled/"
-                file-type: "link"
-            register: default-apps
+                file_type: "link"
+            register: default_apps
         
         -   name:   Asegurarme que las apps por defecto de nginx quedan desinstaladas
             file:
                 path: "{{ item.path }}"
                 state: absent
-            loop: "{{ default-apps.files }}"
+            loop: "{{ default_apps.files }}"
     when: install is changed
 
 
