@@ -52,4 +52,4 @@
         -   include_tasks: "posttasks/main.yaml"
 
     handlers:
-        -   include_tasks: "handlers/main.yaml"
+        -   import_tasks: "handlers/main.yaml"

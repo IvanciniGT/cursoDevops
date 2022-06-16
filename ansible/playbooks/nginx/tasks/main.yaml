@@ -6,7 +6,7 @@
             nginx: "{{ nginx_version }}"
     
 -   name:   Asegurarme que nginx queda configurado como debe estarlo          # CONFIGURACION
-    #notify: reiniciar-servicio
+    notify: reiniciar-servicio
     copy:
         src: ../templates/nginx.conf
         dest: /etc/nginx/nginx.conf

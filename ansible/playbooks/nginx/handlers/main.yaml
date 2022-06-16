@@ -1,2 +1,5 @@
 -   name:   Reiniciar el servicio
     listen: reiniciar-servicio
+    service:
+        name: nginx
+        state: restarted
