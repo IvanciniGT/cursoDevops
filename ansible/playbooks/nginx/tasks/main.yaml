@@ -6,10 +6,11 @@
             nginx: "{{ nginx_version }}"
     
 -   name:   Asegurarme que nginx queda configurado como debe estarlo          # CONFIGURACION
-    notify: reiniciar-servicio
-    debug:
-        msg: "Configurando nginx"
-    # /etc/nginx/nginx.conf
+    #notify: reiniciar-servicio
+    copy:
+        src: ../templates/nginx.conf
+        dest: /etc/nginx/nginx.conf
+        mode: '0644'
 
 #******
 -   name:   Asegurarme que las apps por defecto de nginx quedan desinstaladas
@@ -43,8 +44,16 @@
                 #single_branch: yes
                 version: "{{ item.version }}"
             loop: "{{ apps_to_deploy }}"
-
-
+        
+        -   name: >-
+                    Asegurarme que la configuración de mi app está creada en la 
+                    carpeta /etc/nginx/sites-available
+            template:
+                src: ../templates/app.conf
+                dest: "/etc/nginx/sites-available/{{ item.name }}"
+                mode: '0644'
+            loop: "{{ apps_to_deploy }}"
+                    
 #******
 -   name:   Asegurarme que el servicio queda configurado
     service:
