@@ -3,6 +3,18 @@
 -   name:   Pruebas
     block:
         -   name:   Probar nginx
+        # Ver si el proceso está corriendo
+        # Ver si el puerto está abierto
         -   name:   Probar app
+        # llamada por http://app1.prod:81
         -   name:   Probar comunicaciones
 
+
+# Pruebas: Prueba unitaria
+# Cuando apruebo algo, si falla, quiero saber que falla?
+
+
+# wait_for. <. telnet puerto
+# shell ps
+
+# uri
