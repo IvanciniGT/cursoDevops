@@ -38,7 +38,10 @@
                 version: master
                 port: 81
                 serverName: app2.prod
-
+                test:
+                    endpoint: index.html
+                    status_code: 200
+                    test_content: "algun texto que se devuelva al hacer esa peticion"
             #app1:
             #    repo: https://github.com/ansible/ansible-examples.git
             #    version: master
