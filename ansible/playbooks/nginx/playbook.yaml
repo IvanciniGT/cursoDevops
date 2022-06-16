@@ -27,7 +27,17 @@
             #            package:
             #            min_version:
             #            max_version:
-            
+        apps_to_deploy:
+            -   name: app1
+                repo: https://github.com/IvanciniGT/webEjemploAnsible
+                version: master
+            -   name: app2
+                repo: https://github.com/IvanciniGT/webEjemploAnsible
+                version: master
+                
+            #app1:
+            #    repo: https://github.com/ansible/ansible-examples.git
+            #    version: master
     pre_tasks:
         -   include_tasks: "pretasks/main.yaml"
             

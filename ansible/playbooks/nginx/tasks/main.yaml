@@ -27,16 +27,22 @@
             loop: "{{ default_apps.files }}"
     when: install is changed
 
-
+                                    ###
 -   name:   Asegurarme que mi(s) app(s) quedan instaladas
-    debug:
-        msg: "Instalando apps"
-    # /var/webapps/app1
-    # Copiar un app web: html, css, js, php
-    
-    #Tareas: # Idempotencia
-    #    1: Asegurarme que las dependencias de este playbook estén instaladas en la máquina
-    #    2: Crear la carpeta si no está creada
+                                    ###
+    block:
+        -   name:   Asegurarme que la carpeta de despliegues existe
+            file:
+                path: /var/webapps
+                state: directory
+                
+        -   name:   Asegurarme que mi app se clona en esa carpeta
+            git:
+                repo: "{{ item.repo }}"
+                dest: "/var/webapps/{{ item.name }}"
+                #single_branch: yes
+                version: "{{ item.version }}"
+            loop: "{{ apps_to_deploy }}"
     #    3: Utilizar el modulo git ... para qué? Pedir a git que clone el repo
     
 
