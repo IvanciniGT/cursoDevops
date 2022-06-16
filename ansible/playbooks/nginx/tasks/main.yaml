@@ -28,12 +28,12 @@
 
 #******
 -   name:   Asegurarme que el servicio queda configurado
-    # /var
     service:
+        name: nginx
+        enabled: true
 
 #******
 -   name:   Asegurarme que los puertos quedan abiertos
-    # /var
     ufw
     firewalld
     iptables
