@@ -1,5 +1,11 @@
 ---
 - hosts: localhost
   remote_user: root
+  vars:
+    ports: 
+      - protocol: tcp
+        port: 80
+      - protocol: tcp
+        port: 443
   roles:
     - firewallPorts

@@ -1,10 +1,6 @@
 ---
 # defaults file for firewallPorts
-ports: 
-    - protocol: tcp
-      port: 80
-    - protocol: tcp
-      port: 443
+ports: []
 
 # loop: ports
 # item.port
