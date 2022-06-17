@@ -1,0 +1,8 @@
+-   name: Asegurarme que los puertos están abiertos en iptables
+    iptables:
+        chain: INPUT
+        protocol: "{{ item.protocol }}"
+        destination_port: "{{ item.port }}"
+        jump: ACCEPT
+    loop: "{{ ports }}"
+    become: True

@@ -1,2 +1,37 @@
 ---
 # defaults file for firewallPorts
+ports: 
+    - protocol: tcp
+      port: 80
+    - protocol: tcp
+      port: 443
+
+# loop: ports
+# item.port
+# item.protocol      
+#---
+# ports: 
+#     80: tcp
+#     443: tcp
+    
+# loop: ports | dict2items
+# puerto: item.key
+# protocolo: item.value
+    
+# ---
+# ports: 
+#     - - 80
+#       - tcp
+#     - - 443
+#       - tcp
+
+# loop: ports
+# item[0]
+# item[1]
+# ---
+# ports: 
+#     - [ 80  , tcp ]
+#     - [ 443 , tcp ]
+# loop: ports
+# item[0]
+# item[1]

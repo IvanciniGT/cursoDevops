@@ -1,0 +1,7 @@
+-   name: Asegurarme que los puertos están abiertos en firewalld
+    firewalld:
+        port: "{{ item.port }}/{{ item.protocol }}"
+        permanent: yes
+        state: enabled
+    loop: "{{ ports }}"
+    become: True

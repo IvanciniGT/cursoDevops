@@ -1,0 +1,7 @@
+-   name: Asegurarme que los puertos están abiertos en ufw
+    ufw:
+        rule: allow
+        proto: "{{ item.protocol }}"
+        port: "{{ item.port }}"
+    loop: "{{ ports }}"
+    become: True
