@@ -5,46 +5,8 @@
     gather_facts: True
     become: True
     
-    vars:   # Las variables las voy a quitar de aqui más adelante!!!
-        nginx_version: 1.14.0
-        SUPPORTED_OS: 
-            - Debian
-            - Redhat
-        DEPENDENCIES:
-            git: ~
-            #-   name: git
-            #    version: 1.14.0
-            #    installs:
-            #        Debian:
-            #            repo:
-            #            key:
-            #            package:
-            #            min_version:
-            #            max_version:
-            #        Redhat:
-            #            repo:
-            #            key:
-            #            package:
-            #            min_version:
-            #            max_version:
-        apps_to_deploy:
-            -   name: app1
-                repo: https://github.com/IvanciniGT/webEjemploAnsible
-                version: master
-                port: 82
-                serverName: app1.prod
-            -   name: app2
-                repo: https://github.com/IvanciniGT/webEjemploAnsible
-                version: master
-                port: 81
-                serverName: app2.prod
-                test:
-                    endpoint: index.html
-                    status_code: 200
-                    test_content: "algun texto que se devuelva al hacer esa peticion"
-            #app1:
-            #    repo: https://github.com/ansible/ansible-examples.git
-            #    version: master
+    vars: {}
+       
     pre_tasks:
         -   include_tasks: "pretasks/main.yaml"
             

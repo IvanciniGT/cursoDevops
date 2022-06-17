@@ -1,8 +1,20 @@
 # Y si esto se ejecuta en una maquina que no es ni Debian ni Redhat???
+-   name: Cargar variables Internas
+    include_vars: 
+        file: "internal-vars/main.yaml"
+        name: internal
+
+
+-   name: Cargar variables de usuario
+    include_vars: 
+        file: "vars/main.yaml"
+        name: user
+
+
 -   name: Asegurerme que la máquina es Debian o Redhat
     fail: 
         msg: Sistema operativo no soportado
-    when: ansible_facts['os_family'] not in SUPPORTED_OS
+    when: ansible_facts['os_family'] not in internal.SUPPORTED_OS
    
 -   name: Obtener la versión de nginx instalada
     shell:
@@ -35,7 +47,7 @@
         #    when: ansible_facts['os_family'] == 'Redhat'
             
     #     Si hay instalada una versión y no es la que quiero: 
-    when: version.rc == 0 and nginx_version not in version.stdout
+    when: version.rc == 0 and user.nginx_version not in version.stdout
           # nginx version: nginx/1.14.0 (Ubuntu).      1.14.0
           # Opciones: 1: Forzar a que el comando ya me devuelva solo la version
           # Opción 2: Usar expresiones regulares
@@ -44,7 +56,7 @@
 -   name: Asegurarme que las dependencias de este playbook estén instaladas en la máquina
     include_tasks: "os-tasks/{{ ansible_facts['os_family'] }}/install.yaml"
     vars:
-        paquetes: "{{ DEPENDENCIES }}"
+        paquetes: "{{ internal.DEPENDENCIES }}"
 
 
 

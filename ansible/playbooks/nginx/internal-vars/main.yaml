@@ -1,0 +1,20 @@
+SUPPORTED_OS: 
+    - Debian
+    - Redhat
+DEPENDENCIES:
+    git: ~
+    #-   name: git
+    #    version: 1.14.0
+    #    installs:
+    #        Debian:
+    #            repo:
+    #            key:
+    #            package:
+    #            min_version:
+    #            max_version:
+    #        Redhat:
+    #            repo:
+    #            key:
+    #            package:
+    #            min_version:
+    #            max_version:

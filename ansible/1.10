@@ -1,9 +1,0 @@
-Reading package lists...
-Building dependency tree...
-Reading state information...
-nginx is already the newest version (1.14.0-0ubuntu1.10).
-The following packages were automatically installed and are no longer required:
-  linux-aws-5.4-headers-5.4.0-1075 linux-headers-5.4.0-1075-aws
-  linux-image-5.4.0-1075-aws linux-modules-5.4.0-1075-aws
-Use 'sudo apt autoremove' to remove them.
-0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.

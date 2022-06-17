@@ -25,7 +25,7 @@
                         port: "{{ item.port }}"
                         state: started
                         
-                    loop: "{{ apps_to_deploy }}"
+                    loop: "{{ user.apps_to_deploy }}"
                     
                         
         -   name: Comprobar aplciaciones
@@ -34,7 +34,7 @@
                 status_code: 200
                 return_content: True
             register: llamada
-            loop: "{{ apps_to_deploy }}"
+            loop: "{{ user.apps_to_deploy }}"
 
         # llamada por http://app1.prod:81
         -   name: Comprobar aplciaciones
@@ -43,7 +43,7 @@
                 status_code: 200
                 return_content: True
             register: llamada
-            loop: "{{ apps_to_deploy }}"
+            loop: "{{ user.apps_to_deploy }}"
             delegate_to: localhost
 
 

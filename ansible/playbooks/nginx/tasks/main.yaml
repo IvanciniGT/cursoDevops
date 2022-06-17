@@ -3,7 +3,7 @@
     include_tasks: "os-tasks/{{ ansible_facts['os_family'] }}/install.yaml"
     vars:
         paquetes:
-            nginx: "{{ nginx_version }}"
+            nginx: "{{ user.nginx_version }}"
     
 -   name:   Asegurarme que nginx queda configurado como debe estarlo          # CONFIGURACION
     notify: reiniciar-servicio
@@ -43,7 +43,7 @@
                 dest: "/var/webapps/{{ item.name }}"
                 #single_branch: yes
                 version: "{{ item.version }}"
-            loop: "{{ apps_to_deploy }}"
+            loop: "{{ user.apps_to_deploy }}"
         
         -   name: >-
                     Asegurarme que la configuración de mi app está creada en la 
@@ -52,7 +52,7 @@
                 src: ../templates/app.conf
                 dest: "/etc/nginx/sites-available/{{ item.name }}"
                 mode: '0644'
-            loop: "{{ apps_to_deploy }}"
+            loop: "{{ user.apps_to_deploy }}"
 
         -   name: >-
                     Asegurarme que la configuración de mi app está vinculada en la 
@@ -61,7 +61,7 @@
                 src: "/etc/nginx/sites-available/{{ item.name }}"
                 path: "/etc/nginx/sites-enabled/{{ item.name }}"
                 state: link
-            loop: "{{ apps_to_deploy }}"
+            loop: "{{ user.apps_to_deploy }}"
                     
 #******
 -   name:   Asegurarme que el servicio queda configurado
