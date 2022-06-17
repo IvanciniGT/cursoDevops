@@ -7,7 +7,21 @@
     hosts: all  # Esta es la práctica extendida
                 # La limitación de en qué entornos se ejecuatrá este playbook puede establecerse en varios lugares... 
                 # Habitualmente se establece en otro sitio... al ejecutar el playbook
-    # En que orden se aplicará el playbook en las máquians remotas del inventario
+    # En que orden se aplicará el playbook en las máquians remotas del 
+    
+            # all          es un grupo .. otro más
+            # hostname
+            # server1.prod.es:server5.prod.es
+            # groupname
+            # En los inventarios, un host puede estar dado de alta en varios grupos
+            # webservers:!produccion    todos los webservers que NO sean de produccion
+            # webservers:&produccion    todos los webservers que SI sean de produccion
+            
+            # La práctica habitual es poner all
+            
+            # Al ejecutar ansible-playbook, podemos poner: 
+            # $ ansible-playbook -i INVENTARIO PLAYBOOK --limit CUALQUIERA-DE-LAS-ANTERIORES
+            
     order: inventory # reverse_inventory | sorted (alfabetico) | reverse_sorted | shuffle
     
     # Permite obtener información del entorno remoto que estamos configurando

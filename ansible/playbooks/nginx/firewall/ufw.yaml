@@ -1,5 +1,0 @@
--   name: Asegurarme que los puertos están abiertos en ufw
-    ufw:
-        rule: allow
-        port: '80'
-        proto: tcp

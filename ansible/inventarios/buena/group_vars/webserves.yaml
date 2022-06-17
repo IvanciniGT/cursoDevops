@@ -1,0 +1,20 @@
+ansible_connection: ssh
+ansible_user: USUARIO
+ansible_ssh_private_key_file: /mi/ruta/al/fichero
+nginx_version: 1.14.0
+
+apps_to_deploy:
+    -   name: app1
+        repo: https://github.com/IvanciniGT/webEjemploAnsible
+        version: master
+        port: 82
+        serverName: app1.prod
+    -   name: app2
+        repo: https://github.com/IvanciniGT/webEjemploAnsible
+        version: master
+        port: 81
+        serverName: app2.prod
+        test:
+            endpoint: index.html
+            status_code: 200
+            test_content: "algun texto que se devuelva al hacer esa peticion"

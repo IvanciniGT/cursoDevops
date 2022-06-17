@@ -1,0 +1,5 @@
+localhost
+
+[webservers]
+webserver1.prod.es
+webserver2.prod.es

@@ -70,29 +70,10 @@
         enabled: true
 
 #******
--   name:   Asegurarme que los puertos quedan abiertos
-    block:
-        -   name: Averiguar el firewall en uso
-            shell: |
-                firewalld --version 1>/dev/null 2>&1
-                if [ $? == 0 ]; then
-                    echo firewalld
-                else
-                    ufw --version 1>/dev/null 2>&1
-                    if [ $? == 0 ]; then
-                        echo ufw
-                    else
-                        iptables --version 1>/dev/null 2>&1
-                        if [ $? == 0 ]; then
-                            echo iptables
-                        else
-                            echo Ninguno
-                        fi
-                    fi
-                fi
-            register: firewall_utilizado
-            changed_when: False
-        
-        -   name: Asegurarme que los puertos están abiertos en caso de ser necesario
-            include_tasks: "firewall/{{ firewall_utilizado.stdout }}.yaml"
-            when: "'Ninguno' not in firewall_utilizado.stdout"
+-   name:   Asegurarme que los puertos quedan abiertos en caso de ser necesario
+    include_role:
+        name: firewallPorts
+    vars:
+        ports: 
+          - protocol: tcp
+            port: 80
