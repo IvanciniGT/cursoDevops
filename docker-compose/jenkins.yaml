@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    jenkins:
+        image: jenkins/jenkins:lts-jdk11
+        container_name: mijenkins
+        ports:
+            - 8080:8080 
+            - 50000:50000
+        restart: on-failure 
+        volumes:
+            - /home/ubuntu/environment/datos/jenkins:/var/jenkins_home 
