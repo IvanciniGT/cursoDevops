@@ -188,6 +188,8 @@
                     shell:
                         cmd: "exit 17"
                     register: potencialmente_explosiva
+                    tags:
+                        - instalacion
                 
             rescue: # catch
             
@@ -196,6 +198,8 @@
                     debug:
                         msg: Tarea rescate 1
                     when: potencialmente_explosiva.rc == 17
+                    tags:
+                        - pruebas
                     
                 -   name: Tarea que se ejecutará si la anterior produce un error
                     debug:
