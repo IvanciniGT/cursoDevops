@@ -8,5 +8,8 @@ services:
             - 8080:8080 
             - 50000:50000
         restart: on-failure 
+        user: root
         volumes:
             - /home/ubuntu/environment/datos/jenkins:/var/jenkins_home 
+            - /var/run/docker.sock:/var/run/docker.sock 
+            - /usr/bin/docker:/usr/bin/docker
